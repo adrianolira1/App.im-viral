@@ -12,6 +12,7 @@
             --card: #1e1e1e;
             --text: #ffffff;
             --success: #00c853;
+            --pix-color: #32bcad;
         }
 
         body {
@@ -81,8 +82,6 @@
             font-size: 1rem;
         }
 
-        input:focus, select:focus { border-color: var(--secondary); }
-
         button {
             width: 100%;
             padding: 18px;
@@ -103,19 +102,28 @@
             filter: brightness(1.1);
         }
 
-        .payment-methods {
-            margin-top: 15px;
+        /* Seção PIX */
+        .pix-area {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #2a2a2a;
+            border: 2px dashed var(--pix-color);
+            border-radius: 12px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #888;
         }
 
-        .payment-methods img {
-            width: 100%;
-            max-width: 250px;
-            filter: grayscale(1) invert(1);
-            opacity: 0.6;
-            margin-top: 10px;
+        .pix-key {
+            font-size: 1.2rem;
+            color: var(--pix-color);
+            font-weight: bold;
+            margin: 10px 0;
+            display: block;
+        }
+
+        .pix-instructions {
+            font-size: 0.85rem;
+            color: #aaa;
         }
 
         .testimonials {
@@ -132,11 +140,6 @@
 
         .stars { color: #ffca28; }
         
-        .download-count {
-            font-weight: bold;
-            color: var(--success);
-        }
-
         footer {
             margin-top: 30px;
             padding: 20px;
@@ -176,40 +179,32 @@
                 </select>
             </div>
 
-            <div class="input-group">
-                <label>Comentário Personalizado (Opcional)</label>
-                <textarea id="comment" rows="2" placeholder="Ex: Perfil incrível! 🔥"></textarea>
-            </div>
-
-            <button type="submit" id="btnSubmit">ATIVAR DIVULGAÇÃO AGORA</button>
+            <button type="submit" id="btnSubmit">GERAR PAGAMENTO PIX</button>
             
-            <div class="payment-methods">
-                Pagamento Seguro via Mercado Pago<br>
-                <img src="https://logospng.org/download/mercado-pago/logo-mercado-pago-2048.png" alt="Mercado Pago" style="width: 120px; filter: none; opacity: 1;">
+            <div id="pixArea" class="pix-area">
+                <p>Pagamento via PIX</p>
+                <span class="pix-key" id="copyKey">68984130369</span>
+                <p class="pix-instructions">
+                    Realize o pagamento e envie o comprovante para o suporte para ativação imediata.
+                </p>
+                <small style="color: var(--pix-color)">Chave Telefone</small>
             </div>
         </form>
     </div>
 
     <div class="testimonials">
         <h3>Depoimentos Reais</h3>
-        
         <div class="testimonial-item">
             <div class="stars">★★★★★</div>
-            <p>"Muito satisfeito com o app! Ganhei seguidores reais rapidamente. Recomendo!"</p>
+            <p>"Muito satisfeito com o app! Ganhei seguidores reais rapidamente."</p>
             <small><strong>- Marcos Silva</strong></small>
-        </div>
-
-        <div class="testimonial-item">
-            <div class="stars">★★★★★</div>
-            <p>"O ImãViral é sensacional. Simples, funcional e cumpre o que promete. Totalmente satisfeito."</p>
-            <small><strong>- Ana Julia</strong></small>
         </div>
     </div>
 </div>
 
 <footer>
     © 2026 ImãViral - Todos os direitos reservados.<br>
-    Processamento seguro e imediato.
+    Liberação manual após confirmação do PIX.
 </footer>
 
 <script>
@@ -217,19 +212,16 @@
         e.preventDefault();
         
         const btn = document.getElementById('btnSubmit');
-        const link = document.getElementById('profileLink').value;
+        const pixArea = document.getElementById('pixArea');
         
-        // Link geral do Mercado Pago (Você deve criar links específicos para cada valor se quiser automação total)
-        const mpLink = "https://mpago.la/18QQi3i";
-
-        // Feedback visual
-        btn.innerHTML = "REDIRECIONANDO...";
-        btn.style.opacity = "0.7";
-        btn.disabled = true;
-
-        setTimeout(() => {
-            window.location.href = mpLink;
-        }, 1200);
+        btn.innerHTML = "AGUARDANDO PAGAMENTO...";
+        btn.style.background = "#444";
+        
+        // Mostra a área do PIX
+        pixArea.style.display = "block";
+        
+        // Alerta simples para o usuário
+        alert("Chave PIX gerada! Copie o número e realize o pagamento.");
     });
 </script>
 
