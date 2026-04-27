@@ -78,9 +78,10 @@
             color: white;
             box-sizing: border-box;
             outline: none;
+            font-size: 1rem;
         }
 
-        input:focus { border-color: var(--secondary); }
+        input:focus, select:focus { border-color: var(--secondary); }
 
         button {
             width: 100%;
@@ -166,12 +167,12 @@
             </div>
 
             <div class="input-group">
-                <label>Quantidade de Seguidores (Reais e BR)</label>
-                <select id="followersQty">
-                    <option value="100">100 Seguidores</option>
-                    <option value="500">500 Seguidores</option>
-                    <option value="1000">1.000 Seguidores</option>
-                    <option value="5000">5.000 Seguidores</option>
+                <label>Selecione o Plano de Crescimento</label>
+                <select id="followersQty" required>
+                    <option value="15.00">43 Seguidores — R$ 15,00</option>
+                    <option value="98.40">200 Seguidores — R$ 98,40</option>
+                    <option value="210.00">2.000 Seguidores — R$ 210,00</option>
+                    <option value="450.00">5.000 Seguidores — R$ 450,00</option>
                 </select>
             </div>
 
@@ -194,7 +195,7 @@
         
         <div class="testimonial-item">
             <div class="stars">★★★★★</div>
-            <p>"Muito satisfeito com o app! Ganhei 500 seguidores brasileiros em menos de 24h. Recomendo!"</p>
+            <p>"Muito satisfeito com o app! Ganhei seguidores reais rapidamente. Recomendo!"</p>
             <small><strong>- Marcos Silva</strong></small>
         </div>
 
@@ -217,6 +218,8 @@
         
         const btn = document.getElementById('btnSubmit');
         const link = document.getElementById('profileLink').value;
+        
+        // Link geral do Mercado Pago (Você deve criar links específicos para cada valor se quiser automação total)
         const mpLink = "https://mpago.la/18QQi3i";
 
         // Feedback visual
@@ -224,7 +227,6 @@
         btn.style.opacity = "0.7";
         btn.disabled = true;
 
-        // Pequeno delay para simular processamento e melhorar UX
         setTimeout(() => {
             window.location.href = mpLink;
         }, 1200);
